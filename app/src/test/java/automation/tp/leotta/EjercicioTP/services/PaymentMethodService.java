@@ -6,7 +6,13 @@ import automation.tp.leotta.EjercicioTP.pages.PaymentMethodPage;
 public class PaymentMethodService {
     private PaymentMethodPage paymentMethodPage = new PaymentMethodPage();
 
+    public void checkSameAddress(){
+        DriverActions.setChecked(this.paymentMethodPage.getChkSameAddress());
+    }
+
     public void goPlaceOrder(){
-        DriverActions.click(this.paymentMethodPage.getBtnPlaceOrder());
+        this.checkSameAddress();
+        DriverActions.click(this.paymentMethodPage.getDivBAD());
+        DriverActions.clickAfterWait(this.paymentMethodPage.getBtnPlaceOrder(), this.paymentMethodPage.getLoading());
     }
 }

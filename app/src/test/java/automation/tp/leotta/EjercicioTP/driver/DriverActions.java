@@ -9,6 +9,7 @@ public class DriverActions {
         DriverManager.getWait().until(
             ExpectedConditions.and(
                 ExpectedConditions.presenceOfElementLocated(element),
+                ExpectedConditions.visibilityOfElementLocated(element),
                 ExpectedConditions.elementToBeClickable(element)
             )
         );
@@ -67,5 +68,30 @@ public class DriverActions {
         );
 
         new Select(DriverManager.getDriver().findElement(element)).selectByVisibleText(selectText);
+    }
+
+    public static void setChecked(By element) {
+        DriverManager.getWait().until(
+            ExpectedConditions.and(
+                ExpectedConditions.presenceOfElementLocated(element),
+                ExpectedConditions.visibilityOfElementLocated(element),
+                ExpectedConditions.elementToBeClickable(element)
+            )
+        );
+
+        if (!DriverManager.getDriver().findElement(element).isSelected()) DriverManager.getDriver().findElement(element).click();
+    }
+
+    public static void clickAfterWait(By element, By elementToWait) {
+        DriverManager.getWait().until(
+            ExpectedConditions.and(
+                ExpectedConditions.presenceOfElementLocated(element),
+                ExpectedConditions.visibilityOfElementLocated(element),
+                ExpectedConditions.elementToBeClickable(element),
+                ExpectedConditions.invisibilityOfElementLocated(elementToWait)
+            )
+        );
+
+        DriverManager.getDriver().findElement(element).click();
     }
 }
